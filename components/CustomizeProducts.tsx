@@ -1,7 +1,9 @@
 'use client';
 
 import { products } from '@wix/stores';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Add from './Add';
+//TODO:
 
 const CustomizeProducts = ({
   productId,
@@ -16,10 +18,13 @@ const CustomizeProducts = ({
     {},
   );
 
+  const [selectedVariant, setSelectedVariant] = useState<products.Variant>();
+
   const handleClick = (optionType: string, choice: string) => {
     setSelectedItem((prev) => ({ ...prev, [optionType]: choice }));
   };
 
+  //this function check is available the product in stock
   const isVariantInStock = (choices: { [key: string]: string }) => {
     return variants.some((variant) => {
       const variantChoices = variant.choices;
@@ -36,6 +41,19 @@ const CustomizeProducts = ({
       );
     });
   };
+
+  useEffect(() => {
+    const variant = variants.map((variant) => {
+      const variantChoices = variant.choices;
+      if (!variantChoices) return false;
+
+      return Object.entries(selectedItem).every(
+        ([key, value]) => variantChoices[key] === value,
+      );
+    });
+
+    setSelectedVariant(variant);
+  }, [selectedItem, variants]);
 
   return (
     <div className="flex flex-col gap-6">
@@ -75,7 +93,7 @@ const CustomizeProducts = ({
                 </li>
               ) : (
                 <li
-                  className="ring-1 ring-lama text-lama rounded-md py-1 px-4 text-sm"
+                  className="ring-1 ring-nazim text-nazim rounded-md py-1 px-4 text-sm"
                   style={{
                     cursor: disabled ? 'not-allowed' : 'pointer',
                     backgroundColor: selected
@@ -96,6 +114,13 @@ const CustomizeProducts = ({
           </ul>
         </div>
       ))}
+      <Add
+        productId={productId}
+        variantId={
+          selectedVariant?._id || '00000000-0000-0000-0000-000000000000'
+        }
+        stockNumber={selectedVariant?.stock?.quantity || 0}
+      />
     </div>
   );
 };

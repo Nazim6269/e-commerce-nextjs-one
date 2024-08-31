@@ -10,7 +10,7 @@ const ProductImages = ({ items }: { items: any }) => {
     <div className="">
       <div className="h-[500px] relative">
         <Image
-          src={items[index]?.image?.url}
+          src={items?.[index]?.image?.url}
           alt=""
           fill
           sizes="50vw"
