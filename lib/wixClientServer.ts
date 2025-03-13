@@ -1,14 +1,14 @@
-import { wixClientId } from '@/secret';
-import { createClient, OAuthStrategy } from '@wix/sdk';
-import { collections, products } from '@wix/stores';
-import { cookies } from 'next/headers';
+import { wixClientId } from "@/secret";
+import { createClient, OAuthStrategy } from "@wix/sdk";
+import { collections, products } from "@wix/stores";
+import { cookies } from "next/headers";
 
 export const wixClientServer = async () => {
   let refreshToken;
 
   try {
-    const cookieStore = cookies();
-    refreshToken = JSON.parse(cookieStore.get('refreshToken')?.value || '{}');
+    const cookieStore = await cookies();
+    refreshToken = JSON.parse(cookieStore.get("refreshToken")?.value || "{}");
   } catch (error) {
     console.log(error);
   }
@@ -22,7 +22,7 @@ export const wixClientServer = async () => {
       clientId: wixClientId!,
       tokens: {
         refreshToken,
-        accessToken: { value: '', expiresAt: 0 },
+        accessToken: { value: "", expiresAt: 0 },
       },
     }),
   });

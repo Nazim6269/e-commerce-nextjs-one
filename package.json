@@ -12,9 +12,9 @@
     "@wix/sdk": "^1.12.12",
     "@wix/stores": "^1.0.203",
     "isomorphic-dompurify": "^2.15.0",
-    "next": "14.2.7",
-    "react": "^18",
-    "react-dom": "^18"
+    "next": "^15.2.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",

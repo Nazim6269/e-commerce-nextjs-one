@@ -1,13 +1,14 @@
-import Add from '@/components/Add';
-import CustomizeProducts from '@/components/CustomizeProducts';
-import ProductImages from '@/components/ProductImages';
-import { wixClientServer } from '@/lib/wixClientServer';
+import Add from "@/components/Add";
+import CustomizeProducts from "@/components/CustomizeProducts";
+import ProductImages from "@/components/ProductImages";
+import { wixClientServer } from "@/lib/wixClientServer";
 
 const SingleItemPage = async ({ params }: { params: { slug: any } }) => {
   const wixClient = await wixClientServer();
+  const slug = await params.slug;
   const products = await wixClient.products
     .queryProducts()
-    .eq('slug', params.slug)
+    .eq("slug", slug)
     .find();
 
   const product = products.items[0];

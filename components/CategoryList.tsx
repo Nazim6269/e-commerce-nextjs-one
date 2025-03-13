@@ -1,11 +1,11 @@
-import { wixClientServer } from '@/lib/wixClientServer';
-import Image from 'next/image';
-import Link from 'next/link';
+import { wixClientServer } from "@/lib/wixClientServer";
+import Image from "next/image";
+import Link from "next/link";
 
 const CategoryList = async () => {
   const wixClient = await wixClientServer();
-
   const categories = await wixClient.collections.queryCollections().find();
+
   return (
     <div className="px-4 overflow-x-scroll scrollbar-hide">
       <div className="flex gap-4 md:gap-8">
@@ -17,7 +17,7 @@ const CategoryList = async () => {
           >
             <div className="relative bg-slate-100 w-full h-96">
               <Image
-                src={item?.media?.mainMedia?.image?.url || 'cat.png'}
+                src={item?.media?.mainMedia?.image?.url || "/cart.png"}
                 alt="imageOne"
                 fill
                 sizes="25vw"
