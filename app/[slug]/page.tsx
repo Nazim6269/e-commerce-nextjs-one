@@ -3,7 +3,7 @@ import CustomizeProducts from "@/components/CustomizeProducts";
 import ProductImages from "@/components/ProductImages";
 import { wixClientServer } from "@/lib/wixClientServer";
 
-const SingleItemPage = async ({ params }: { params: { slug: any } }) => {
+const SingleItemPage = async ({ params }: { params: { slug: string } }) => {
   const wixClient = await wixClientServer();
   const slug = await params.slug;
   const products = await wixClient.products
