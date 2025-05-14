@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { products } from '@wix/stores';
-import { useEffect, useState } from 'react';
-import Add from './Add';
+import { products } from "@wix/stores";
+import { useEffect, useState } from "react";
+import Add from "./Add";
 //TODO:
 
 const CustomizeProducts = ({
@@ -15,7 +15,7 @@ const CustomizeProducts = ({
   productOptions: products.ProductOption[];
 }) => {
   const [selectedItem, setSelectedItem] = useState<{ [key: string]: string }>(
-    {},
+    {}
   );
 
   const [selectedVariant, setSelectedVariant] = useState<products.Variant>();
@@ -33,7 +33,7 @@ const CustomizeProducts = ({
 
       return (
         Object.entries(choices).every(
-          ([key, value]) => variantChoices[key] === value,
+          ([key, value]) => variantChoices[key] === value
         ) &&
         variant.stock?.inStock &&
         variant.stock?.quantity &&
@@ -43,12 +43,12 @@ const CustomizeProducts = ({
   };
 
   useEffect(() => {
-    const variant = variants.map((variant) => {
+    const variant = variants.find((variant) => {
       const variantChoices = variant.choices;
       if (!variantChoices) return false;
 
       return Object.entries(selectedItem).every(
-        ([key, value]) => variantChoices[key] === value,
+        ([key, value]) => variantChoices[key] === value
       );
     });
 
@@ -74,12 +74,12 @@ const CustomizeProducts = ({
                 ? undefined
                 : () => handleClick(option.name!, choice.description!);
 
-              return option.name === 'Color' ? (
+              return option.name === "Color" ? (
                 <li
                   className="w-8 h-8 rounded-full ring-1 ring-gray-300 relative"
                   style={{
                     backgroundColor: choice.value,
-                    cursor: disabled ? 'not-allowed' : 'pointer',
+                    cursor: disabled ? "not-allowed" : "pointer",
                   }}
                   onClick={clickHandler}
                   key={choice.description}
@@ -95,14 +95,14 @@ const CustomizeProducts = ({
                 <li
                   className="ring-1 ring-nazim text-nazim rounded-md py-1 px-4 text-sm"
                   style={{
-                    cursor: disabled ? 'not-allowed' : 'pointer',
+                    cursor: disabled ? "not-allowed" : "pointer",
                     backgroundColor: selected
-                      ? '#f35c7a'
+                      ? "#f35c7a"
                       : disabled
-                      ? '#FBCFE8'
-                      : 'white',
-                    color: selected || disabled ? 'white' : '#f35c7a',
-                    boxShadow: disabled ? 'none' : '',
+                      ? "#FBCFE8"
+                      : "white",
+                    color: selected || disabled ? "white" : "#f35c7a",
+                    boxShadow: disabled ? "none" : "",
                   }}
                   key={choice.description}
                   onClick={clickHandler}
@@ -117,7 +117,7 @@ const CustomizeProducts = ({
       <Add
         productId={productId}
         variantId={
-          selectedVariant?._id || '00000000-0000-0000-0000-000000000000'
+          selectedVariant?._id || "00000000-0000-0000-0000-000000000000"
         }
         stockNumber={selectedVariant?.stock?.quantity || 0}
       />

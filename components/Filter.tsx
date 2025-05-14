@@ -1,9 +1,7 @@
-'use client';
-
-import React from 'react';
+"use client";
 
 const Filter = () => {
-  const handleFilterChange = (e) => {};
+  const handleFilterChange = () => {};
 
   return (
     <div className="mt-12 flex justify-between">

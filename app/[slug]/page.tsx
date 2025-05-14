@@ -3,9 +3,13 @@ import CustomizeProducts from "@/components/CustomizeProducts";
 import ProductImages from "@/components/ProductImages";
 import { wixClientServer } from "@/lib/wixClientServer";
 
-const SingleItemPage = async ({ params }: { params: { slug: string } }) => {
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
+
+export default async function SingleItemPage({ params }: PageProps) {
   const wixClient = await wixClientServer();
-  const slug = await params.slug;
+  const slug = (await params).slug;
   const products = await wixClient.products
     .queryProducts()
     .eq("slug", slug)
@@ -63,6 +67,4 @@ const SingleItemPage = async ({ params }: { params: { slug: string } }) => {
       </div>
     </div>
   );
-};
-
-export default SingleItemPage;
+}
