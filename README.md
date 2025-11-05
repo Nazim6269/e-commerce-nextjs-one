@@ -77,29 +77,29 @@ Visit: http://localhost:3000
 └── package.json
 
 ## 🧩 Key Functionalities
-Product Management via Wix CMS (fetching and updating dynamically)
-User Authentication with Google and Credentials (NextAuth)
-Favorites & Wishlist system
-Cart management with local persistence
-Dynamic product filtering and sorting
-Fully responsive design with Tailwind CSS
-SEO optimization with dynamic metadata
+- Product Management via Wix CMS (fetching and updating dynamically)
+- User Authentication with Google and Credentials (NextAuth)
+- Favorites & Wishlist system
+- Cart management with local persistence
+- Dynamic product filtering and sorting
+- Fully responsive design with Tailwind CSS
+- SEO optimization with dynamic metadata
 
 ## 💡 Future Improvements
-Add Stripe payment integration for real checkout flow
-Include user order history and tracking
-Enable product reviews and ratings
-Implement admin dashboard for analytics and inventory
-Add multi-currency and localization support
+- Add Stripe payment integration for real checkout flow
+- Include user order history and tracking
+- Enable product reviews and ratings
+- Implement admin dashboard for analytics and inventory
+- Add multi-currency and localization support
 
 ## 💻 Deployment
 The project is deployed on Vercel for fast, secure, and serverless hosting.
-🔗 Live Demo: https://your-vercel-link.vercel.app
+🔗 Live Demo: [https://e-commerce-nextjs-one-ten.vercel.app](https://e-commerce-nextjs-one-ten.vercel.app/)
 
 ## 👨‍💻 Author
 Nazim Uddin
 Front-End Developer | React & Next.js Enthusiast
 
-🌐 [Portfolio](https://portfolio-nextjs-one-tau.vercel.app/)
-💼 [LinkedIn](https://www.linkedin.com/in/nazim-uddin-23a93a216/)
-🐙 [GitHub](https://github.com/Nazim6269)
+- 🌐 [Portfolio](https://portfolio-nextjs-one-tau.vercel.app/)
+- 💼 [LinkedIn](https://www.linkedin.com/in/nazim-uddin-23a93a216/)
+- 🐙 [GitHub](https://github.com/Nazim6269)
