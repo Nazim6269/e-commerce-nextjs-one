@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🛒 Next.js E-commerce Website
 
-## Getting Started
+A modern, full-featured **E-commerce web application** built with **Next.js**, **TypeScript**, and **Tailwind CSS**, featuring secure authentication, product management via **Wix**, and a clean, responsive UI.
 
-First, run the development server:
 
+---
+
+## 🚀 Features
+
+- ⚙️ **Next.js 15 (App Router)** – Server and client components for better performance  
+- 🛍️ **Wix Integration** – Manage and update products directly from Wix CMS  
+- 🔐 **NextAuth Authentication** – Supports both Google and credential logins  
+- 🎨 **Tailwind CSS + ShadCN UI** – Modern, fully responsive user interface  
+- 💖 **Favorites / Wishlist** – Save your favorite items for quick access  
+- 🔎 **Dynamic Filtering** – Filter products by category, price, or rating  
+- 🛒 **Cart Management** – Add, update, and remove products from the shopping cart  
+- 💳 **Checkout Flow** – Secure and intuitive checkout experience  
+- 🌐 **SEO Optimized** – Uses metadata and structured data for better visibility  
+- ☁️ **Deployed on Vercel** – Fast, global, and production-ready hosting  
+
+---
+
+## 🧰 Tech Stack
+
+| Category | Technologies |
+|-----------|--------------|
+| **Framework** | Next.js (App Router), React 19 |
+| **Language** | TypeScript |
+| **Styling** | Tailwind CSS, ShadCN/UI |
+| **Authentication** | NextAuth (Google + Credentials) |
+| **CMS / Product Source** | Wix CMS |
+| **Hosting** | Vercel |
+
+---
+
+## ⚙️ Installation
+
+### 1️⃣ Clone the repository
 ```bash
-npm run dev
+git clone https://github.com/Nazim6269/e-commerce-nextjs-one.git
+cd e-commerce-nextjs-one
+```
+## Install Dependencies
+```bash
+yarn install
 # or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Run Development server
+```bash
+yarn dev
+# or
+npm run dev
+```
+### Open Your Browser
+Visit: http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Screenshots
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Project Structure
 
-## Learn More
+├── app/
+│   ├── (auth)/          # Login / Register routes
+│   ├── (shop)/          # Product listing and details pages
+│   ├── api/             # API routes for NextAuth and Wix data
+│   └── layout.tsx
+├── components/
+│   ├── ui/              # ShadCN UI components
+│   ├── navbar/
+│   └── footer/
+├── lib/
+│   ├── wix.ts           # Functions for fetching products from Wix
+│   └── utils.ts
+├── public/
+├── styles/
+└── package.json
 
-To learn more about Next.js, take a look at the following resources:
+## 🧩 Key Functionalities
+Product Management via Wix CMS (fetching and updating dynamically)
+User Authentication with Google and Credentials (NextAuth)
+Favorites & Wishlist system
+Cart management with local persistence
+Dynamic product filtering and sorting
+Fully responsive design with Tailwind CSS
+SEO optimization with dynamic metadata
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 💡 Future Improvements
+Add Stripe payment integration for real checkout flow
+Include user order history and tracking
+Enable product reviews and ratings
+Implement admin dashboard for analytics and inventory
+Add multi-currency and localization support
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 💻 Deployment
+The project is deployed on Vercel for fast, secure, and serverless hosting.
+🔗 Live Demo: https://your-vercel-link.vercel.app
 
-## Deploy on Vercel
+## 👨‍💻 Author
+Nazim Uddin
+Front-End Developer | React & Next.js Enthusiast
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+🌐 [Portfolio](https://portfolio-nextjs-one-tau.vercel.app/)
+💼 [LinkedIn](https://www.linkedin.com/in/nazim-uddin-23a93a216/)
+🐙 [GitHub](https://github.com/Nazim6269)
