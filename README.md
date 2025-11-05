@@ -35,7 +35,7 @@ A modern, full-featured **E-commerce web application** built with **Next.js**, *
 
 ## ⚙️ Installation
 
-### 1️⃣ Clone the repository
+### Clone the repository
 ```bash
 git clone https://github.com/Nazim6269/e-commerce-nextjs-one.git
 cd e-commerce-nextjs-one
@@ -59,7 +59,7 @@ Visit: http://localhost:3000
 ## Screenshots
 
 ## Project Structure
-
+```
 ├── app/
 │   ├── (auth)/          # Login / Register routes
 │   ├── (shop)/          # Product listing and details pages
@@ -75,8 +75,10 @@ Visit: http://localhost:3000
 ├── public/
 ├── styles/
 └── package.json
+```
 
 ## 🧩 Key Functionalities
+
 - Product Management via Wix CMS (fetching and updating dynamically)
 - User Authentication with Google and Credentials (NextAuth)
 - Favorites & Wishlist system
@@ -86,6 +88,7 @@ Visit: http://localhost:3000
 - SEO optimization with dynamic metadata
 
 ## 💡 Future Improvements
+
 - Add Stripe payment integration for real checkout flow
 - Include user order history and tracking
 - Enable product reviews and ratings
@@ -93,8 +96,11 @@ Visit: http://localhost:3000
 - Add multi-currency and localization support
 
 ## 💻 Deployment
+
 The project is deployed on Vercel for fast, secure, and serverless hosting.
+
 🔗 Live Demo: [https://e-commerce-nextjs-one-ten.vercel.app](https://e-commerce-nextjs-one-ten.vercel.app/)
+
 
 ## 👨‍💻 Author
 Nazim Uddin
