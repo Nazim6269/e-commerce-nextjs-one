@@ -9,12 +9,26 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/mongodb-adapter": "^3.11.1",
+    "@radix-ui/react-separator": "^1.1.8",
+    "@radix-ui/react-slot": "^1.2.4",
     "@wix/sdk": "^1.12.12",
     "@wix/stores": "^1.0.203",
+    "add": "^2.0.6",
+    "button": "^1.1.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "init": "^0.1.2",
     "isomorphic-dompurify": "^2.15.0",
+    "lucide-react": "^0.553.0",
+    "mongodb": "^7.0.0",
     "next": "^15.2.2",
+    "next-auth": "^5.0.0-beta.30",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "shadcn": "^3.5.0",
+    "tailwind-merge": "^3.4.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@types/node": "^20",
