@@ -8,7 +8,6 @@ import Image from "next/image";
 
 export default async function Profile() {
   const userData: Session | null = await auth();
-  console.log(userData, "user");
 
   if (!userData) {
     return (

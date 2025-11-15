@@ -1,21 +1,26 @@
 "use client";
 
+import { loginAction } from "@/actions/formAction";
 import SocialLogin from "@/components/SocialLogin";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useActionState } from "react";
 
-const loading = false;
+//form initial state
+const initialFormState = {
+  email: "",
+  password: "",
+};
 
 const SignIn = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-  const handleSubmit = () => {};
-  const handleChange = () => {};
-
+  const router = useRouter();
+  const [state, formAction, isPending] = useActionState(
+    loginAction,
+    initialFormState
+  );
+  if (state.success) {
+    router.push("/");
+  }
   return (
     <section className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
@@ -23,7 +28,7 @@ const SignIn = () => {
           Log in with your account
         </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form action={formAction} className="space-y-4">
           {/* Email */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
@@ -32,8 +37,6 @@ const SignIn = () => {
             <input
               type="email"
               name="email"
-              value={formData.email}
-              onChange={handleChange}
               required
               className="mt-1 w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-pink-500 focus:ring focus:outline-none focus:ring-pink-100"
               placeholder="you@example.com"
@@ -48,8 +51,6 @@ const SignIn = () => {
             <input
               type="password"
               name="password"
-              value={formData.password}
-              onChange={handleChange}
               required
               className="mt-1 w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-pink-500 focus:ring focus:outline-none focus:ring-pink-100"
               placeholder="Enter a strong password"
@@ -59,10 +60,10 @@ const SignIn = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            disabled={loading}
+            disabled={isPending}
             className="w-full rounded-lg bg-pink-600 py-2 font-semibold text-white transition-all hover:bg-pink-700 disabled:opacity-60"
           >
-            {loading ? "Creating Account..." : "Sign In"}
+            {isPending ? "Signing in ..." : "Sign In"}
           </button>
         </form>
 
