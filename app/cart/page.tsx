@@ -1,39 +1,79 @@
-import Image from "next/image";
+import CartItem from "@/components/CartItem";
+import OrderSummary from "@/components/OrderSummary";
+import Link from "next/link";
 
 const CartPage = () => {
+  //TODO: Fetching cart items
+  //TODO: Calculate total price
+  const calculateTotalPrice = (): number => {
+    return 20000;
+  };
   return (
-    <section className="h-20 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative">
+    <section className="px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative">
       <div className="flex flex-col gap-8">
-        {/* ITEM */}
+        {/* ITEMS */}
+        <CartItem
+          image="https://images.pexels.com/photos/20218545/pexels-photo-20218545.jpeg"
+          name="Delicious Pancakes"
+          availability="In Stock"
+          price={12.99}
+          initialQuantity={2}
+        />
+        <CartItem
+          image="https://images.pexels.com/photos/20218545/pexels-photo-20218545.jpeg"
+          name="Delicious Pancakes"
+          availability="In Stock"
+          price={12.99}
+          initialQuantity={2}
+        />
+        <CartItem
+          image="https://images.pexels.com/photos/20218545/pexels-photo-20218545.jpeg"
+          name="Delicious Pancakes"
+          availability="In Stock"
+          price={12.99}
+          initialQuantity={2}
+        />
 
-        <div className="flex gap-4">
-          <Image
-            src="https://images.pexels.com/photos/20218545/pexels-photo-20218545/free-photo-of-pancakes-on-a-plate.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-            alt=""
-            width={72}
-            height={96}
-            className="object-cover rounded-md"
-          />
+        {/* Order Summary  */}
+        <div className="mt-4 space-y-6">
+          <OrderSummary totalPrice={calculateTotalPrice()} tax={350} />
+          <div className="flex items-start sm:items-center">
+            <input
+              id="terms-checkbox-2"
+              type="checkbox"
+              value=""
+              className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+            />
+            <label
+              htmlFor="terms-checkbox-2"
+              className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
+              {" "}
+              I agree with the{" "}
+              <a
+                href="#"
+                title=""
+                className="text-primary-700 underline hover:no-underline dark:text-primary-500"
+              >
+                Terms and Conditions
+              </a>{" "}
+            </label>
+          </div>
 
-          <div className="flex flex-col justify-between w-full">
-            {/* TOP */}
-            <div className="">
-              {/* TITLE */}
-              <div className="flex items-center justify-between gap-8">
-                <h3 className="font-semibold">productName</h3>
-                <div className="p-1 bg-gray-50 rounded-sm flex items-center gap-2">
-                  <div className="text-xs text-green-500">quantity</div>
-                  $2
-                </div>
-              </div>
-              {/* DESC */}
-              <div className="text-sm text-gray-500">availability</div>
-            </div>
-            {/* BOTTOM */}
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-500">Qty. quantity</span>
-              <span className="text-blue-500">Remove</span>
-            </div>
+          <div className="gap-4 sm:flex sm:items-center">
+            <Link
+              href={"/"}
+              className="w-full rounded-lg  border border-gray-200 bg-white px-5  py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+            >
+              Return to Shopping
+            </Link>
+
+            <button
+              type="submit"
+              className="mt-4 flex w-full items-center justify-center rounded-lg bg-black  px-5 py-2.5 text-sm font-medium text-white  focus:outline-none focus:ring-4  sm:mt-0"
+            >
+              Send the order
+            </button>
           </div>
         </div>
       </div>

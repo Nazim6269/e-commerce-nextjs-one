@@ -1,5 +1,4 @@
-import Image from "next/image";
-import Link from "next/link";
+import CartItem from "./CartItem";
 
 const CartModal = () => {
   const cartItems = true;
@@ -10,62 +9,13 @@ const CartModal = () => {
       ) : (
         <>
           <h2 className="text-xl">Shopping Cart</h2>
-          {/* LIST */}
-          <div className="flex flex-col gap-8">
-            {/* ITEM */}
-
-            <div className="flex gap-4">
-              <Image
-                src="https://images.pexels.com/photos/20218545/pexels-photo-20218545/free-photo-of-pancakes-on-a-plate.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt=""
-                width={72}
-                height={96}
-                className="object-cover rounded-md"
-              />
-
-              <div className="flex flex-col justify-between w-full">
-                {/* TOP */}
-                <div className="">
-                  {/* TITLE */}
-                  <div className="flex items-center justify-between gap-8">
-                    <h3 className="font-semibold">productName</h3>
-                    <div className="p-1 bg-gray-50 rounded-sm flex items-center gap-2">
-                      <div className="text-xs text-green-500">quantity</div>
-                      $2
-                    </div>
-                  </div>
-                  {/* DESC */}
-                  <div className="text-sm text-gray-500">availability</div>
-                </div>
-                {/* BOTTOM */}
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Qty. quantity</span>
-                  <span className="text-blue-500">Remove</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* BOTTOM */}
-          <div className="">
-            <div className="flex items-center justify-between font-semibold">
-              <span className="">Subtotal</span>
-              <span className="">$20</span>
-            </div>
-            <p className="text-gray-500 text-sm mt-2 mb-4">
-              Shipping and taxes calculated at checkout.
-            </p>
-            <div className="flex justify-between text-sm">
-              <Link
-                href="/cart"
-                className="rounded-md py-3 px-4 ring-1 ring-gray-300"
-              >
-                View Cart
-              </Link>
-              <button className="rounded-md py-3 px-4 bg-black text-white disabled:cursor-not-allowed disabled:opacity-75">
-                Checkout
-              </button>
-            </div>
-          </div>
+          <CartItem
+            image="https://images.pexels.com/photos/20218545/pexels-photo-20218545.jpeg"
+            name="Delicious Pancakes"
+            availability="In Stock"
+            price={12.99}
+            initialQuantity={2}
+          />
         </>
       )}
     </div>

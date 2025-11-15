@@ -1,6 +1,6 @@
 "use server";
 
-import { signIn } from "@/auth";
+import { signIn, signOut } from "@/auth";
 import { registerToDB } from "@/lib/dbQuery";
 export interface User {
   name: string;
@@ -8,6 +8,8 @@ export interface User {
   password: string;
   confirmPassword: string;
 }
+
+//manual signup action
 export const signUpAction = async (prevState: number, formData: FormData) => {
   const name = formData.get("name") as string;
   const email = formData.get("email") as string;
@@ -30,6 +32,7 @@ export const signUpAction = async (prevState: number, formData: FormData) => {
   return { success: true, message: "Successfully created account" };
 };
 
+//login action
 export const loginAction = async (prevState: number, formData: FormData) => {
   const loginData = {
     email: formData.get("email") as string,
@@ -44,4 +47,9 @@ export const loginAction = async (prevState: number, formData: FormData) => {
   } else {
     return { success: true, message: "Successfully login!!!" };
   }
+};
+
+//sign out action
+export const doSignOut = async () => {
+  await signOut();
 };
