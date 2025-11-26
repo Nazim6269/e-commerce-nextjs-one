@@ -6,12 +6,12 @@ import { useState } from "react";
 
 export interface CartItemProps {
   image: string;
-  name: string | null | undefined;
+  name: string;
   availability: string;
   price: number;
   initialQuantity?: number;
   productId: string;
-  qty?: number;
+
   onRemove?: (id: string) => void;
 }
 
@@ -74,7 +74,7 @@ const CartItem: React.FC<CartItemProps> = ({
 
       {/* REMOVE BUTTON */}
       <button
-        onClick={() => onRemove(productId)}
+        onClick={() => onRemove?.(productId)}
         className="text-red-500 hover:text-red-600 text-sm ml-4"
       >
         Remove

@@ -2,12 +2,11 @@
 
 import { cartStorage } from "@/services/localStorage";
 import { useState } from "react";
-import { CartItemProps } from "./CartItem";
 
-// export interface CartItemProps {
-//   id: string;
-//   qty: number;
-// }
+export interface CartItemMinimal {
+  id: string;
+  qty: number;
+}
 
 const Add = ({
   productId,
@@ -30,15 +29,15 @@ const Add = ({
   };
 
   const handleAddToCart = (id: string) => {
-    const items: CartItemProps[] = cartStorage.getProduct() || [];
+    const items: CartItemMinimal[] = cartStorage.getProduct() || [];
 
     let itemExists = false;
 
     const updatedItems = items.reduce(
-      (acc: CartItemProps[], curr: CartItemProps) => {
+      (acc: CartItemMinimal[], curr: CartItemMinimal) => {
         if (curr.id === id) {
           itemExists = true;
-          acc.push({ ...curr, qty: curr.qty + quantity });
+          acc.push({ ...curr, qty: curr.qty! + quantity });
         } else {
           acc.push(curr);
         }

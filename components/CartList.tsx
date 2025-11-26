@@ -3,10 +3,11 @@
 import { cartStorage } from "@/services/localStorage";
 import { products } from "@wix/stores";
 import { useEffect, useState } from "react";
-import CartItem, { CartItemProps } from "./CartItem";
+import { CartItemMinimal } from "./Add";
+import CartItem from "./CartItem";
 
 const CartList = ({ items }: { items: any }) => {
-  const [cart, setCart] = useState<CartItemProps[]>([]);
+  const [cart, setCart] = useState<CartItemMinimal[]>([]);
 
   const filteredProducts = items.filter((wixItem: products.Product) =>
     cart.some((item) => item.id === wixItem._id)
@@ -32,11 +33,11 @@ const CartList = ({ items }: { items: any }) => {
         <CartItem
           key={item._id}
           image={item.media?.mainMedia?.image?.url || "/product.png"}
-          name={item?.name}
+          name={item?.name!}
           availability="In Stock"
-          price={item?.priceData?.price}
+          price={item?.priceData?.price!}
           initialQuantity={1}
-          productId={item._id}
+          productId={item._id!}
           onRemove={removeItem}
         />
       ))}

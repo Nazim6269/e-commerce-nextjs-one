@@ -1,3 +1,5 @@
+import { CartItemMinimal } from "@/components/Add";
+
 class LocalStorage<T> {
   setProduct(value: T): void {
     if (typeof window === "undefined") return;
@@ -5,10 +7,10 @@ class LocalStorage<T> {
     localStorage.setItem("cart", JSON.stringify(value));
   }
 
-  getProduct(): T | null {
+  getProduct(): CartItemMinimal[] | null {
     if (typeof window === "undefined") return null;
     const item = localStorage.getItem("cart");
-    return item ? JSON.parse(item) : null;
+    return item ? (JSON.parse(item) as CartItemMinimal[]) : null;
   }
 }
 
