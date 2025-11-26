@@ -1,13 +1,13 @@
-import Filter from '@/components/Filter';
-import ProductList from '@/components/ProductList';
-import { wixClientServer } from '@/lib/wixClientServer';
-import Image from 'next/image';
+import Filter from "@/components/Filter";
+import ProductList from "@/components/ProductList";
+import { wixClientServer } from "@/lib/wixClientServer";
+import Image from "next/image";
 
 const ListPage = async ({ searchParams }: { searchParams: any }) => {
   const wixClient = await wixClientServer();
 
   const res = await wixClient.collections.getCollectionBySlug(
-    searchParams.cat || 'all-products',
+    searchParams.cat || "all-products"
   );
 
   return (
@@ -33,7 +33,7 @@ const ListPage = async ({ searchParams }: { searchParams: any }) => {
       <h1 className="mt-12 text-xl font-semibold">Shoes For You!</h1>
       <ProductList
         categoryId={
-          res.collection?._id || '00000000-000000-000000-000000000001'
+          res.collection?._id || "00000000-000000-000000-000000000001"
         }
         searchParams={searchParams}
       />

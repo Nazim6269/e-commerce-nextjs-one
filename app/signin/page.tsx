@@ -5,11 +5,20 @@ import SocialLogin from "@/components/SocialLogin";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useActionState } from "react";
+//stateProps
+export type SignInStateProps = {
+  email?: string;
+  password?: string;
+  success?: boolean;
+  message?: string;
+};
 
 //form initial state
-const initialFormState = {
+const initialFormState: SignInStateProps = {
   email: "",
   password: "",
+  success: false,
+  message: "",
 };
 
 const SignIn = () => {

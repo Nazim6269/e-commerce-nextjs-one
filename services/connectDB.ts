@@ -8,7 +8,7 @@ interface ConnectDBResponse {
 
 export const connectDB = async (): Promise<ConnectDBResponse> => {
   try {
-    await mongoose.connect(mongoUri);
+    await mongoose.connect(mongoUri!);
 
     console.log("DB connected successfully");
     return { success: true, message: "DB connected successfully" };

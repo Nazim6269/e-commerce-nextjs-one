@@ -4,17 +4,28 @@ import { signUpAction } from "@/actions/formAction";
 import Link from "next/link";
 import { useActionState } from "react";
 
+export type SignUpStateProps = {
+  name?: string;
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+  success: boolean;
+  message: string;
+};
+
 //form initial state
-const initialFormState = {
+const initialFormState: SignUpStateProps = {
   name: "",
   email: "",
   password: "",
   confirmPassword: "",
+  success: false,
+  message: "",
 };
 
 //component
 const SignUpPage: React.FC<{}> = () => {
-  const [state, formAction, isPending] = useActionState<void>(
+  const [state, formAction, isPending] = useActionState(
     signUpAction,
     initialFormState
   );

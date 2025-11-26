@@ -1,5 +1,7 @@
 "use server";
 
+import { SignInStateProps } from "@/app/signin/page";
+import { SignUpStateProps } from "@/app/signup/page";
 import { signIn, signOut } from "@/auth";
 import { registerToDB } from "@/lib/dbQuery";
 export interface User {
@@ -10,7 +12,10 @@ export interface User {
 }
 
 //manual signup action
-export const signUpAction = async (prevState: number, formData: FormData) => {
+export const signUpAction = async (
+  _prevState: SignUpStateProps,
+  formData: FormData
+): Promise<SignUpStateProps> => {
   const name = formData.get("name") as string;
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
@@ -33,7 +38,10 @@ export const signUpAction = async (prevState: number, formData: FormData) => {
 };
 
 //login action
-export const loginAction = async (prevState: number, formData: FormData) => {
+export const loginAction = async (
+  _prevState: SignInStateProps,
+  formData: FormData
+): Promise<SignInStateProps> => {
   const loginData = {
     email: formData.get("email") as string,
     password: formData.get("password") as string,

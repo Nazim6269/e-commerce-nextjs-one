@@ -1,74 +1,153 @@
-import { wixClientServer } from '@/lib/wixClientServer';
-import { products } from '@wix/stores';
-import Image from 'next/image';
-import Link from 'next/link';
-import DOMPurify from 'isomorphic-dompurify';
+import { wixClientServer } from "@/lib/wixClientServer";
+import { products } from "@wix/stores";
+import DOMPurify from "isomorphic-dompurify";
+import Image from "next/image";
+import Link from "next/link";
+
+// Define the structure for the query parameters
+interface SearchParams {
+  sort?: string;
+  min?: string;
+  max?: string;
+  type?: string;
+}
+
+// Define the component's props
+interface ProductListProps {
+  categoryId: string;
+  limit?: number;
+  searchParams?: SearchParams;
+}
 
 const ProductList = async ({
   categoryId,
   limit,
   searchParams,
-}: {
-  categoryId: string;
-  limit?: number;
-  searchParams?: any;
-}) => {
+}: ProductListProps) => {
   const wixClient = await wixClientServer();
 
+  // Base Product Query
   const res = await wixClient.products
     .queryProducts()
-    .eq('collectionIds', categoryId)
+    .eq("collectionIds", categoryId)
     .limit(limit || 20)
     .find();
 
+  //copy of the original items
+  let productsToFilter: products.Product[] = res.items || [];
+
+  // --- Filtering Logic ---
+
+  // Handle PRICE filtering (min and max)
+  const minPrice = parseFloat(searchParams?.min || "0");
+  const maxPrice = parseFloat(searchParams?.max || Infinity.toString());
+
+  if (minPrice > 0 || maxPrice < Infinity) {
+    productsToFilter = productsToFilter.filter((product) => {
+      const price = product.priceData?.price ?? 0;
+      return price >= minPrice && price <= maxPrice;
+    });
+  }
+
+  // Handle TYPE filtering (physical vs. digital)
+  if (searchParams?.type) {
+    productsToFilter = productsToFilter.filter((product) => {
+      if (
+        searchParams.type === "physical" &&
+        product.productType === "physical"
+      ) {
+        return true;
+      }
+      if (
+        searchParams.type === "digital" &&
+        product.productType === "digital"
+      ) {
+        return true;
+      }
+      return false;
+    });
+  }
+
+  // ---  Sorting Logic ---
+  let sortedProducts = [...productsToFilter]; // Always work on a new copy
+
+  if (searchParams?.sort) {
+    const isAscending = searchParams.sort === "asc-price";
+    const isDescending = searchParams.sort === "desc-price";
+
+    if (isAscending || isDescending) {
+      sortedProducts = sortedProducts.sort((a, b) => {
+        const priceA = a.priceData?.price ?? 0;
+        const priceB = b.priceData?.price ?? 0;
+
+        return isAscending ? priceA - priceB : priceB - priceA;
+      });
+    }
+  }
+
+  // The final list to render is the sorted list
+  const finalProductList = sortedProducts;
+
   return (
     <div className="mt-12 flex gap-x-8 gap-y-16 justify-between flex-wrap">
-      {res.items?.map((product: products.Product) => (
-        <Link
-          href={`/${product?.slug}`}
-          className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]"
-          key={product?._id}
-        >
-          <div className="relative w-full h-80">
-            <Image
-              src={product.media?.mainMedia?.image?.url || '/product.png'}
-              alt="imageOne"
-              fill
-              sizes="25vw"
-              className="absolute object-cover rounded-md z-10 hover:opacity-0 transition-opacity easy duration-500"
-            />
-            {product.media?.items && (
+      {finalProductList.length === 0 ? (
+        <p className="text-gray-500 text-lg w-full text-center">
+          No products found matching your criteria.
+        </p>
+      ) : (
+        finalProductList.map((product: products.Product) => (
+          <Link
+            href={`/${product?.slug}`}
+            className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]"
+            key={product?._id}
+          >
+            <div className="relative w-full h-80">
+              {/* Main Image */}
               <Image
-                src={product.media?.items[1]?.image?.url || '/product.png'}
-                alt="imageOne"
+                src={product.media?.mainMedia?.image?.url || "/product.png"}
+                alt={product?.name || "Product image"}
                 fill
-                sizes="25vw"
-                className="absolute object-cover rounded-md"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 45vw, 22vw"
+                className="absolute object-cover rounded-md z-10 hover:opacity-0 transition-opacity easy duration-500"
               />
-            )}
-          </div>
-          <div className="flex justify-between">
-            <span className="font-medium">{product?.name}</span>
-            <span className="font-semibold">${product?.priceData?.price}</span>
-          </div>
-          {product.additionalInfoSections && (
-            <div
-              className="text-sm text-gray-500"
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(
-                  product.additionalInfoSections.find(
-                    (section: any) => section.title === 'shortDesc',
-                  )?.description || '',
-                ),
-              }}
-            ></div>
-          )}
+              {/* Secondary/Hover Image */}
+              {product.media?.items && product.media.items.length > 1 && (
+                <Image
+                  src={product.media.items[1]?.image?.url || "/product.png"}
+                  alt={`${product?.name} hover image`}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 45vw, 22vw"
+                  className="absolute object-cover rounded-md"
+                />
+              )}
+            </div>
+            <div className="flex justify-between">
+              <span className="font-medium">{product?.name}</span>
+              <span className="font-semibold">
+                ${product?.priceData?.price?.toFixed(2) ?? "N/A"}
+              </span>
+            </div>
 
-          <button className="rounded-2xl ring-1 ring-nazim text-nazim w-max py-2 px-4 text-xs hover:bg-nazim hover:text-white">
-            Add to Cart
-          </button>
-        </Link>
-      ))}
+            {/* Description Display */}
+            {product.additionalInfoSections && (
+              <div
+                className="text-sm text-gray-500 line-clamp-2" // Added line-clamp for neatness
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(
+                    product.additionalInfoSections.find(
+                      (section: any) => section.title === "shortDesc"
+                    )?.description || ""
+                  ),
+                }}
+              ></div>
+            )}
+
+            <button className="rounded-2xl ring-1 ring-nazim text-nazim w-max py-2 px-4 text-xs hover:bg-nazim hover:text-white">
+              Add to Cart
+            </button>
+          </Link>
+        ))
+      )}
     </div>
   );
 };

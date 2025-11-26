@@ -10,8 +10,7 @@ export interface CartItemProps {
   availability: string;
   price: number;
   initialQuantity?: number;
-  productId: string;
-
+  productId?: string;
   onRemove?: (id: string) => void;
 }
 
@@ -74,7 +73,7 @@ const CartItem: React.FC<CartItemProps> = ({
 
       {/* REMOVE BUTTON */}
       <button
-        onClick={() => onRemove?.(productId)}
+        onClick={() => onRemove?.(productId!)}
         className="text-red-500 hover:text-red-600 text-sm ml-4"
       >
         Remove
