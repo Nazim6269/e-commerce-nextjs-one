@@ -11,7 +11,9 @@ const NavIcons = async () => {
     <div className="flex items-center gap-4 xl:gap-6 relative">
       {user?.user ? <ProfileIcon /> : <Link href={"/signin"}>Login</Link>}
       <NotificationIcon />
-      <CartIcon />
+      <Link href={"/cart"}>
+        <CartIcon />
+      </Link>
       <DashboardIcon />
     </div>
   );

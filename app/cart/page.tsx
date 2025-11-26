@@ -1,38 +1,26 @@
-import CartItem from "@/components/CartItem";
+import CartList from "@/components/CartList";
 import OrderSummary from "@/components/OrderSummary";
+import { wixClientServer } from "@/lib/wixClientServer";
 import Link from "next/link";
 
-const CartPage = () => {
-  //TODO: Fetching cart items
+const CartPage = async () => {
+  const wixClient = await wixClientServer();
+
+  const res = await wixClient.products
+    .queryProducts()
+    .eq("collectionIds", "00000000-000000-000000-000000000001")
+    .find();
+
   //TODO: Calculate total price
   const calculateTotalPrice = (): number => {
     return 20000;
   };
+
   return (
     <section className="px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative">
       <div className="flex flex-col gap-8">
         {/* ITEMS */}
-        <CartItem
-          image="https://images.pexels.com/photos/20218545/pexels-photo-20218545.jpeg"
-          name="Delicious Pancakes"
-          availability="In Stock"
-          price={12.99}
-          initialQuantity={2}
-        />
-        <CartItem
-          image="https://images.pexels.com/photos/20218545/pexels-photo-20218545.jpeg"
-          name="Delicious Pancakes"
-          availability="In Stock"
-          price={12.99}
-          initialQuantity={2}
-        />
-        <CartItem
-          image="https://images.pexels.com/photos/20218545/pexels-photo-20218545.jpeg"
-          name="Delicious Pancakes"
-          availability="In Stock"
-          price={12.99}
-          initialQuantity={2}
-        />
+        <CartList items={res.items} />
 
         {/* Order Summary  */}
         <div className="mt-4 space-y-6">

@@ -1,6 +1,13 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { cartStorage } from "@/services/localStorage";
+import { useState } from "react";
+import { CartItemProps } from "./CartItem";
+
+// export interface CartItemProps {
+//   id: string;
+//   qty: number;
+// }
 
 const Add = ({
   productId,
@@ -11,17 +18,42 @@ const Add = ({
   variantId: string;
   stockNumber: number;
 }) => {
-  console.log(stockNumber, 'stocknumber');
   const [quantity, setQuantity] = useState(1);
 
-  const handleQuantity = (type: 'i' | 'd') => {
-    if (type === 'd' && quantity > 1) {
+  const handleQuantity = (type: "i" | "d") => {
+    if (type === "d" && quantity > 1) {
       setQuantity((prev) => prev - 1);
     }
-    if (type === 'i' && quantity < stockNumber) {
+    if (type === "i" && quantity < stockNumber) {
       setQuantity((prev) => prev + 1);
     }
   };
+
+  const handleAddToCart = (id: string) => {
+    const items: CartItemProps[] = cartStorage.getProduct() || [];
+
+    let itemExists = false;
+
+    const updatedItems = items.reduce(
+      (acc: CartItemProps[], curr: CartItemProps) => {
+        if (curr.id === id) {
+          itemExists = true;
+          acc.push({ ...curr, qty: curr.qty + quantity });
+        } else {
+          acc.push(curr);
+        }
+        return acc;
+      },
+      []
+    );
+
+    if (!itemExists) {
+      updatedItems.push({ id, qty: quantity });
+    }
+
+    cartStorage.setProduct(updatedItems);
+  };
+
   return (
     <div className="flex flex-col gap-4">
       <h4 className="font-medium">Choose a Quantity</h4>
@@ -30,7 +62,7 @@ const Add = ({
           <div className="bg-gray-100 py-2 px-4 rounded-3xl flex items-center justify-between w-32">
             <button
               className="cursor-pointer text-xl disabled:cursor-not-allowed disabled:opacity-20"
-              onClick={() => handleQuantity('d')}
+              onClick={() => handleQuantity("d")}
               disabled={quantity === 1}
             >
               -
@@ -38,7 +70,7 @@ const Add = ({
             {quantity}
             <button
               className="cursor-pointer text-xl disabled:cursor-not-allowed disabled:opacity-20"
-              onClick={() => handleQuantity('i')}
+              onClick={() => handleQuantity("i")}
               disabled={quantity === stockNumber}
             >
               +
@@ -48,13 +80,16 @@ const Add = ({
             <div className="text-xs">Product is out of stock</div>
           ) : (
             <div className="text-xs">
-              Only <span className="text-orange-500">{stockNumber} items</span>{' '}
+              Only <span className="text-orange-500">{stockNumber} items</span>{" "}
               left!
               <br /> {"Don't"} miss it
             </div>
           )}
         </div>
-        <button className="w-36 text-sm rounded-3xl ring-1 ring-nazim text-nazim py-2 px-4 hover:bg-nazim hover:text-white disabled:cursor-not-allowed disabled:bg-pink-200 disabled:ring-0 disabled:text-white disabled:ring-none">
+        <button
+          onClick={() => handleAddToCart(productId)}
+          className="w-36 text-sm rounded-3xl ring-1 ring-nazim text-nazim py-2 px-4 hover:bg-nazim hover:text-white disabled:cursor-not-allowed disabled:bg-pink-200 disabled:ring-0 disabled:text-white disabled:ring-none"
+        >
           Add to Cart
         </button>
       </div>

@@ -1,14 +1,18 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
-interface CartItemProps {
+export interface CartItemProps {
   image: string;
-  name: string;
+  name: string | null | undefined;
   availability: string;
   price: number;
   initialQuantity?: number;
+  productId: string;
+  qty?: number;
+  onRemove?: (id: string) => void;
 }
 
 const CartItem: React.FC<CartItemProps> = ({
@@ -16,6 +20,8 @@ const CartItem: React.FC<CartItemProps> = ({
   name,
   availability,
   price,
+  productId,
+  onRemove,
   initialQuantity = 1,
 }) => {
   const [quantity, setQuantity] = useState(initialQuantity);
@@ -26,15 +32,17 @@ const CartItem: React.FC<CartItemProps> = ({
   return (
     <div className="flex items-center gap-6 w-full py-3 border-b border-gray-200 hover:bg-gray-50 transition px-2">
       {/* IMAGE */}
-      <div className="w-16 h-16 flex-shrink-0">
-        <Image
-          src={image}
-          alt={name}
-          width={64}
-          height={64}
-          className="rounded-md object-cover"
-        />
-      </div>
+      <Link href={"/cart"}>
+        <div className="w-16 h-16 flex-shrink-0">
+          <Image
+            src={image}
+            alt={name}
+            width={64}
+            height={64}
+            className="rounded-md object-cover"
+          />
+        </div>
+      </Link>
 
       {/* PRODUCT NAME */}
       <div className="flex-1 font-medium text-gray-800">{name}</div>
@@ -65,7 +73,10 @@ const CartItem: React.FC<CartItemProps> = ({
       </div>
 
       {/* REMOVE BUTTON */}
-      <button className="text-red-500 hover:text-red-600 text-sm ml-4">
+      <button
+        onClick={() => onRemove(productId)}
+        className="text-red-500 hover:text-red-600 text-sm ml-4"
+      >
         Remove
       </button>
     </div>
