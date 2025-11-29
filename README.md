@@ -66,21 +66,70 @@ Visit: http://localhost:3000
 ## Project Structure
 
 ```
-├── app/
-│   ├── (auth)/          # Login / Register routes
-│   ├── (shop)/          # Product listing and details pages
-│   ├── api/             # API routes for NextAuth and Wix data
-│   └── layout.tsx
-├── components/
-│   ├── ui/              # ShadCN UI components
-│   ├── navbar/
-│   └── footer/
-├── lib/
-│   ├── wix.ts           # Functions for fetching products from Wix
-│   └── utils.ts
-├── public/
-├── styles/
-└── package.json
+app/
+├─ [slug]/
+│  └─ page.tsx
+├─ api/
+│  └─ auth/
+│     └─ [...nextauth]/
+│        └─ route.ts
+├─ cart/
+│  └─ page.tsx
+├─ list/
+│  └─ page.tsx
+├─ profile/
+│  └─ page.tsx
+├─ signin/
+│  └─ page.tsx
+├─ signup/
+│  └─ page.tsx
+├─ globals.css
+├─ layout.tsx
+└─ page.tsx
+components/
+├─ ui/
+│  ├─ button.tsx
+│  ├─ card.tsx
+│  ├─ input.tsx
+│  └─ separator.tsx
+├─ Add.tsx
+├─ CartIcon.tsx
+├─ CartItem.tsx
+├─ CartList.tsx
+├─ CartModal.tsx
+├─ CategoryList.tsx
+├─ CustomizeProducts.tsx
+├─ DashboardIcon.tsx
+├─ Filter.tsx
+├─ Footer.tsx
+├─ Menu.tsx
+├─ Navbar.tsx
+├─ NavIcons.tsx
+├─ NotificationIcon.tsx
+├─ OrderSummary.tsx
+├─ ProductImages.tsx
+├─ ProductList.tsx
+├─ ProfileIcon.tsx
+├─ SearchBar.tsx
+├─ SettingModal.tsx
+├─ Skeleton.tsx
+├─ Slider.tsx
+└─ SocialLogin.tsx
+context/
+└─ authContext.tsx
+lib/
+├─ db.ts
+├─ dbQuery.ts
+├─ utils.ts
+└─ wixClientServer.ts
+models/
+└─ userModel.ts
+public/
+services/
+├─ connectDB.ts
+└─ localStorage.ts
+.env
+README.md
 ```
 
 ## 🧩 Key Functionalities
